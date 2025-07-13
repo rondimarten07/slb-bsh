@@ -137,9 +137,8 @@ class CardView extends Page implements HasForms
                 ->title('Kehadiran berhasil disimpan')
                 ->success()
                 ->send();
+            $this->redirect('/admin/presences');
                 
-            $this->closeModal();
-            
         } catch (\Exception $e) {
             DB::rollBack();
             

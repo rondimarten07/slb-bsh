@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Kehadiran PDF</title>
     <style>
-        body { font-family: sans-serif; font-size: 10px; }
+        body { font-family: sans-serif; font-size: 8px; }
         table { width: 100%; border-collapse: collapse; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
         th { background-color: #f4f4f4; }
-        .title { text-align: center; margin-bottom: 20px; font-size: 20px; font-weight: bold; }
+        .title { text-align: center; margin-bottom: 20px; font-size: 16px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -17,10 +17,15 @@
     <table>
         <thead>
             <tr>
-                <th>Nama</th>
+                <th rowspan="2">Nama</th>
+                <th colspan="{{ count($datesInMonth) }}">Tanggal</th>
+                <th colspan="4">Total Presensi</th>
+            </tr>
+            <tr>
                 @foreach($datesInMonth as $date)
                     <th>{{ $date->format('d') }}</th>
                 @endforeach
+                <th>H</th>
                 <th>I</th>
                 <th>S</th>
                 <th>A</th>
@@ -29,6 +34,7 @@
         <tbody>
             @foreach($students as $student)
                 @php
+                    $countH = 0;
                     $countI = 0;
                     $countS = 0;
                     $countA = 0;
@@ -58,11 +64,13 @@
                                         @break
                                     @case('hadir')
                                         <span>H</span>
+                                        @php $countH++; @endphp
                                         @break
                                 @endswitch
                             @endif
                         </td>
                     @endforeach
+                    <td>{{ $countH }}</td>
                     <td>{{ $countI }}</td>
                     <td>{{ $countS }}</td>
                     <td>{{ $countA }}</td>

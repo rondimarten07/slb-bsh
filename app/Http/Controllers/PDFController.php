@@ -16,37 +16,24 @@ class PDFController extends Controller
     public function generatePDF(Request $request)
     {
         $selectedMonth = $request->input('month') ?: Carbon::now()->format('Y-m');
+        $selectedClassroom = $request->input('classroom');
 
         // Get the start and end dates of the month
         $startOfMonth = Carbon::create($selectedMonth)->startOfMonth();
         $endOfMonth = Carbon::create($selectedMonth)->endOfMonth();
 
-        // Fetch students and their attendance
-        // $students = Student::with(['attendance' => function ($query) use ($startOfMonth, $endOfMonth) {
-        //     $query->whereBetween('date', [$startOfMonth, $endOfMonth]);
-        // }])->get();
-
-        $user = Auth::user();
-                
-        $members = User::all();
-        if ($user->hasRole('teacher')) { 
-            $members = User::role(['student', 'teacher'])->where('classroom', $user->classroom);
+        $query = User::role('student');
+        if ($selectedClassroom) {
+            $query->where('classroom', $selectedClassroom);
         }
-
-        if ($user->hasRole('staff')) {
-            $members = User::role(['student', 'staff', 'teacher']);
-        }
-
-        if ($user->hasRole('admin')) {
-            $members = User::role(['student', 'staff']);
-        }
-
-        $students = User::whereIn('id', $members->pluck('id'))->with(['presences' => function ($query) use ($selectedMonth) {
+        $students = $query->with(['presences' => function ($query) use ($selectedMonth) {
             $startOfMonth = Carbon::create($selectedMonth)->startOfMonth();
             $endOfMonth = Carbon::create($selectedMonth)->endOfMonth();
             $query->whereDate('date', '>=', $startOfMonth)
                   ->whereDate('date', '<=', $endOfMonth);
-        }])->get();
+        }])
+        ->orderBy('name')
+        ->get();
 
         // Get all dates in the selected month
         $datesInMonth = [];
@@ -59,6 +46,7 @@ class PDFController extends Controller
             'students' => $students,
             'datesInMonth' => $datesInMonth,
             'selectedMonth' => $selectedMonth,
+            'classroom' => $selectedClassroom,
         ])->setPaper('f4', 'landscape');;
 
         // Download the PDF file

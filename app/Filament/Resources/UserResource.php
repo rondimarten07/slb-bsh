@@ -48,6 +48,7 @@ class UserResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name'),
+                TextInput::make('nis')->label('NIS'),
                 TextInput::make('email')->email(),
                 TextInput::make('password')
                     ->password()

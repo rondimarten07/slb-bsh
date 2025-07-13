@@ -118,7 +118,7 @@ class AttendanceInput extends Page
                 ->title($this->isEdit ? 'Kehadiran berhasil diupdate' : 'Kehadiran berhasil disimpan')
                 ->success()
                 ->send();
-            // Redirect handled by Filament or user
+            $this->redirect('/admin/presences');
         } catch (\Exception $e) {
             DB::rollBack();
             Notification::make()

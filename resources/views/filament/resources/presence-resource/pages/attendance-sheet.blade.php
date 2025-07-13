@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <x-filament::button tag="a" href="{{ route('attendance.pdf', ['month' => $selectedMonth]) }}" target="_blank" color="primary">
+            <x-filament::button tag="a" href="{{ route('attendance.pdf', ['month' => $selectedMonth, 'classroom' => $selectedClassroom]) }}" target="_blank" color="primary">
                 Download PDF
             </x-filament::button>
         </div>

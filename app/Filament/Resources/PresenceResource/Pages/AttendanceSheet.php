@@ -41,7 +41,9 @@ class AttendanceSheet extends Page
             $endOfMonth = Carbon::create($this->selectedMonth)->endOfMonth();
             $query->whereDate('date', '>=', $startOfMonth)
                   ->whereDate('date', '<=', $endOfMonth);
-        }])->get();
+        }])
+        ->orderBy('name')
+        ->get();
         return $students;
     }
 

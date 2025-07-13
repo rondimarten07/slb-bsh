@@ -14,48 +14,42 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $superadmin = User::factory()->create([
+        $superadmin = User::firstOrCreate(['email' => 'superadmin@mail.com'], [
             'name' => 'SuperAdmin',
-            'email' => 'superadmin@mail.com',
             'password' => '$2y$10$qmHHpCehp2iAePN473WIkeHN4luggbZT9EKzVU1kohjniPU9riGKe',
             'classroom' => null
         ]);
         $superadmin->assignRole('superadmin');
 
-        $admin = User::factory()->create([
+        $admin = User::firstOrCreate(['email' => 'admin@mail.com'], [
             'name' => 'Admin',
-            'email' => 'admin@mail.com',
             'password' => '$2y$10$qmHHpCehp2iAePN473WIkeHN4luggbZT9EKzVU1kohjniPU9riGKe',
             'classroom' => null
         ]);
         $admin->assignRole('admin');
 
-        $user = User::factory()->create([
+        $user = User::firstOrCreate(['email' => 'staff@mail.com'], [
             'name' => 'Staff',
-            'email' => 'staff@mail.com',
             'password' => Hash::make('password'),
             'classroom' => null
         ]);
         $user->assignRole('staff');
 
-        $user = User::factory()->create([
+        $user = User::firstOrCreate(['email' => 'bendahara@mail.com'], [
             'name' => 'Bendahara',
-            'email' => 'bendahara@mail.com',
             'password' => Hash::make('password'),
             'classroom' => null
         ]);
         $user->assignRole(roles: 'treasurer');
 
-        $user = User::factory()->create([
+        $user = User::firstOrCreate(['email' => 'teacher@mail.com'], [
             'name' => 'Teacher',
-            'email' => 'teacher@mail.com',
             'password' => Hash::make('password')
         ]);
         $user->assignRole('teacher');
 
-        $user = User::factory()->create([
+        $user = User::firstOrCreate(['email' => 'student@mail.com'], [
             'name' => 'Student',
-            'email' => 'student@mail.com',
             'password' => Hash::make('password')
         ]);
         $user->assignRole('student');

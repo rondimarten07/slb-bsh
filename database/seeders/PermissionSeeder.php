@@ -19,30 +19,30 @@ class PermissionSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        Permission::create(['name' => 'manage-user']);
-        Permission::create(['name' => 'manage-article']);
-        Permission::create(['name' => 'manage-student']);
-        Permission::create(['name' => 'manage-library']);
-        Permission::create(['name' => 'manage-financial']);
-        Permission::create(['name' => 'manage-config']);
+        Permission::firstOrCreate(['name' => 'manage-user']);
+        Permission::firstOrCreate(['name' => 'manage-article']);
+        Permission::firstOrCreate(['name' => 'manage-student']);
+        Permission::firstOrCreate(['name' => 'manage-library']);
+        Permission::firstOrCreate(['name' => 'manage-financial']);
+        Permission::firstOrCreate(['name' => 'manage-config']);
 
-        $role = Role::create(['name' => 'superadmin']);
+        $role = Role::firstOrCreate(['name' => 'superadmin']);
         $role->givePermissionTo('manage-user');
         $role->givePermissionTo('manage-article');
         $role->givePermissionTo('manage-student');
         $role->givePermissionTo('manage-library');
         $role->givePermissionTo('manage-financial');
         
-        $role = Role::create(['name' => 'admin']);
+        $role = Role::firstOrCreate(['name' => 'admin']);
         $role->givePermissionTo('manage-article');
         $role->givePermissionTo('manage-student');
         $role->givePermissionTo('manage-library');
         $role->givePermissionTo('manage-financial');
 
-        $role = Role::create(['name' => 'staff']);
-        $role = Role::create(['name' => 'treasurer']);
-        $role = Role::create(['name' => 'teacher']);
-        $role = Role::create(['name' => 'student']);
+        $role = Role::firstOrCreate(['name' => 'staff']);
+        $role = Role::firstOrCreate(['name' => 'treasurer']);
+        $role = Role::firstOrCreate(['name' => 'teacher']);
+        $role = Role::firstOrCreate(['name' => 'student']);
 
     }
 }
