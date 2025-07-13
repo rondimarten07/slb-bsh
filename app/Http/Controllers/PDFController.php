@@ -44,7 +44,8 @@ class PDFController extends Controller
         $students = User::whereIn('id', $members->pluck('id'))->with(['presences' => function ($query) use ($selectedMonth) {
             $startOfMonth = Carbon::create($selectedMonth)->startOfMonth();
             $endOfMonth = Carbon::create($selectedMonth)->endOfMonth();
-            $query->whereBetween('date', [$startOfMonth, $endOfMonth]);
+            $query->whereDate('date', '>=', $startOfMonth)
+                  ->whereDate('date', '<=', $endOfMonth);
         }])->get();
 
         // Get all dates in the selected month

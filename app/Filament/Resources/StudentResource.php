@@ -38,6 +38,7 @@ class StudentResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name'),
+                TextInput::make('nis')->label('NIS'),
                 TextInput::make('email')->email(),
                 TextInput::make('password')
                     ->password()
@@ -96,6 +97,7 @@ class StudentResource extends Resource
             ->columns([
                 TextColumn::make('no')->rowIndex(),
                 TextColumn::make('name')->sortable(),
+                TextColumn::make('nis')->sortable()->label('NIS'),
                 TextColumn::make('email')->sortable()->copyable()
                     ->hidden(Auth::user()->hasRole('teacer')),
                 TextColumn::make('dob')->sortable()->date()->label('Tanggal Lahir'),

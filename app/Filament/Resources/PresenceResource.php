@@ -132,7 +132,8 @@ class PresenceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPresences::route('/'),
+            'index' => Pages\CardView::route('/'),
+            'list' => Pages\ListPresences::route('/list'),
             'create' => Pages\CreatePresence::route('/create'),
             'edit' => Pages\EditPresence::route('/{record}/edit'),
             'sheet' => Pages\AttendanceSheet::route('/sheet'),
@@ -140,6 +141,7 @@ class PresenceResource extends Resource
             'faq' => Pages\Faq::route('/faq'),
             'students-report' => Pages\StudentsReport::route('/students-report'),
             'paycheck' => Pages\Paycheck::route('/paycheck'),
+            'attendance-input' => Pages\AttendanceInput::route('/attendance-input'),
         ];
     }
 

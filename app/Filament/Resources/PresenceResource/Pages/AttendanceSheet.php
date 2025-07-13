@@ -17,10 +17,11 @@ class AttendanceSheet extends Page
     protected static string $view = 'filament.resources.presence-resource.pages.attendance-sheet';
 
     public $selectedMonth;
+    public $selectedClassroom;
 
     public function mount(){
-        // Set default to the current month
         $this->selectedMonth = Carbon::now()->format('Y-m');
+        $this->selectedClassroom = request()->get('classroom');
     }
 
     public function updateSelectedMonth()
@@ -31,27 +32,17 @@ class AttendanceSheet extends Page
 
     public function getStudentsProperty()
     {
-
-        $user = Auth::user();
-                
-        $members = User::all();
-        if ($user->hasRole('teacher')) { 
-            $members = User::role(['student'])->where('classroom', $user->classroom);
+        $query = User::role('student');
+        if ($this->selectedClassroom) {
+            $query->where('classroom', $this->selectedClassroom);
         }
-
-        if ($user->hasRole('staff')) {
-            $members = User::role(['student', 'staff', 'teacher']);
-        }
-
-        if ($user->hasRole('admin')) {
-            $members = User::role(['student', 'staff']);
-        }
-
-        return User::whereIn('id', $members->pluck('id'))->with(['presences' => function ($query) {
+        $students = $query->with(['presences' => function ($query) {
             $startOfMonth = Carbon::create($this->selectedMonth)->startOfMonth();
             $endOfMonth = Carbon::create($this->selectedMonth)->endOfMonth();
-            $query->whereBetween('date', [$startOfMonth, $endOfMonth]);
+            $query->whereDate('date', '>=', $startOfMonth)
+                  ->whereDate('date', '<=', $endOfMonth);
         }])->get();
+        return $students;
     }
 
     public function getDatesInMonthProperty()

@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             BookloanSeeder::class,
             ReportSeeder::class,
             LedgerSeeder::class,
-            PresenceSeeder::class
+            PresenceSeeder::class,
+            UpdateNisSeeder::class
         ]);
     }
 }

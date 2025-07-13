@@ -14,6 +14,10 @@ class ListPresences extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            Actions\Action::make('card')
+                ->label('Card View')
+                ->url(route('filament.admin.resources.presences.index'))
+                ->icon('heroicon-o-squares-2x2'),
         ];
     }
 }

@@ -37,8 +37,13 @@
                     <td>{{ $student->name }}</td>
                     @foreach($datesInMonth as $date)
                         <td>
-                            @if($student->presences->contains('date', $date))
-                                @switch($student->presences->where('date', $date)->first()->note)
+                            @php
+                                $presence = $student->presences->first(function($item) use ($date) {
+                                    return $item->date->format('Y-m-d') === $date->format('Y-m-d');
+                                });
+                            @endphp
+                            @if($presence)
+                                @switch($presence->note)
                                     @case('izin')
                                         <span>I</span>
                                         @php $countI++; @endphp
@@ -50,6 +55,9 @@
                                     @case('alpa')
                                         <span>A</span>
                                         @php $countA++; @endphp
+                                        @break
+                                    @case('hadir')
+                                        <span>H</span>
                                         @break
                                 @endswitch
                             @endif
