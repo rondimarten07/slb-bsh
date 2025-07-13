@@ -1,0 +1,1 @@
+<img src="{{ Storage::url('public/QR.png') }}" width="200px"/>
