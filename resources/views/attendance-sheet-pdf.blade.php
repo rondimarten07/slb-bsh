@@ -78,5 +78,9 @@
             @endforeach
         </tbody>
     </table>
+    
+    <div style="margin-top: 20px; text-align: right; font-size: 10px;">
+        <strong>Ket:</strong> H = Hadir, S = Sakit, I = Izin, A = Alpa
+    </div>
 </body>
 </html>
