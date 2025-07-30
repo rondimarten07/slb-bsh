@@ -36,11 +36,20 @@
               <i class="bi bi-file-earmark-text-fill icon"></i>
               <div>
                 <h3>{{ $post->title }}</h3>
-                <p>@php 
-                  $firstParagraph = preg_match('/<p>(.*?)<\/p>/', $post->content, $matches) ? $matches[1] : '';
-                  echo substr(strip_tags($firstParagraph), 0, 500); 
-                @endphp</p>
-                {{-- <a href="{{ route('blog') . '/' . $post->slug }}" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a> --}}
+                <div class="article-preview">
+                  @php 
+                    // Strip HTML tags and get clean text
+                    $cleanContent = strip_tags($post->content);
+                    // Get first 300 characters
+                    $preview = substr($cleanContent, 0, 300);
+                    // Add ellipsis if content is longer
+                    if (strlen($cleanContent) > 300) {
+                      $preview .= '...';
+                    }
+                  @endphp
+                  <p>{{ $preview }}</p>
+                </div>
+                <a href="{{ route('blog.view', $post->slug) }}" class="read-more stretched-link">Baca Selengkapnya <i class="bi bi-arrow-right"></i></a>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -51,4 +60,36 @@
   </section>
 
 </main>
+
+<style>
+  .article-preview {
+    margin-bottom: 1rem;
+  }
+  
+  .article-preview p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+  
+  .service-item .read-more {
+    color: #3498db;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .service-item .read-more:hover {
+    color: #2980b9;
+  }
+  
+  .service-item .read-more i {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .service-item .read-more:hover i {
+    transform: translateX(3px);
+  }
+</style>
 @endsection
