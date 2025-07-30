@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>SLB Bunda Bening</title>
+  <title>SLB BSH</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -43,7 +43,7 @@
 			<a href="{{ route('home') }}" class="logo d-flex align-items-center me-auto">
 				{{-- <img src="/assets/img/logo.png" alt=""> --}}
 				<img src="{{ Storage::url('public/logo.jpeg') }}" alt="">
-				<h1 class="sitename">SLB BSH & SLB Bunda Bening</h1>
+				<h1 class="sitename">SLB BSH</h1>
 			</a>
 
 			@include('components.navbar')
