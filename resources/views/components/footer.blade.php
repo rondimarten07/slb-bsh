@@ -45,7 +45,7 @@
       <div class="col-lg-4 col-md-12 footer-newsletter">
         <h4>Donasi</h4>
         <p>Scan QR Code berikut untuk memberikan donasi dan membuat Bunda Bening menjadi lebih baik</p>
-        <img src="{{ Storage::url('public/QR.png') }}" width="200px"/>
+        <img src="{{ asset('assets/img/Generate QR code Form Donasi SLB BSH.png') }}" alt="QR Code Donasi" width="200px"/>
         {{-- <form action="forms/newsletter.php" method="post" class="php-email-form">
           <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
           <div class="loading">Loading</div>
