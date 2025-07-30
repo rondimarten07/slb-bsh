@@ -64,19 +64,6 @@ class AdminPanelProvider extends PanelProvider
             //         ->visible(fn() => auth()->user()->hasRole('teacher'))
             //         // ->hidden(),
             // ])
-            ->navigationItems([
-                NavigationItem::make('FAQ')
-                    ->icon('heroicon-o-information-circle')
-                    ->sort(51)
-                    ->url(fn():string => route('filament.admin.resources.presences.faq'))
-                    ->visible(fn() => auth()->user()->hasAnyRole(['teacher', 'staff']))
-            ]) 
-            ->navigationItems([
-                NavigationItem::make('Slip Gaji')
-                    ->icon('heroicon-o-banknotes')
-                    ->sort(53)
-                    ->url(fn():string => route('filament.admin.resources.presences.paycheck'))
-                    ->visible(fn() => auth()->user()->hasAnyRole(['staff', 'admin']))
-            ]);
+            ;
     }
 }

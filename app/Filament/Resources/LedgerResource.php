@@ -98,6 +98,6 @@ class LedgerResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return auth()->user()->hasAnyRole(['treasurer', 'admin', 'superadmin', 'staff']);
+        return auth()->user()->hasAnyRole(['treasurer', 'admin', 'superadmin']);
     }
 }

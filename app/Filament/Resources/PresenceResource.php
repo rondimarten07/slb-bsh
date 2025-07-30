@@ -138,16 +138,14 @@ class PresenceResource extends Resource
             'edit' => Pages\EditPresence::route('/{record}/edit'),
             'sheet' => Pages\AttendanceSheet::route('/sheet'),
             'qr' => Pages\QrPresence::route('/qr'),
-            'faq' => Pages\Faq::route('/faq'),
             'students-report' => Pages\StudentsReport::route('/students-report'),
-            'paycheck' => Pages\Paycheck::route('/paycheck'),
             'attendance-input' => Pages\AttendanceInput::route('/attendance-input'),
         ];
     }
 
     public static function canViewAny(): bool
     {
-        return auth()->user()->hasAnyRole(['teacher', 'admin', 'superadmin', 'staff']);
+        return auth()->user()->hasAnyRole(['teacher', 'admin', 'superadmin']);
     }
 
     public static function getNavigationLabel(): string
